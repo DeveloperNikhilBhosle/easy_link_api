@@ -67,7 +67,9 @@ export class MarketDataService {
                     records: paginatedData
                 }
             }
-        } catch (error) {
+        } catch (error: any) {
+
+            console.log(error.status, 'error processing')
             // console.error('Error fetching or parsing the CSV:', error);
             if (error.status === 404) {
 

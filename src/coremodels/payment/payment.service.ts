@@ -25,7 +25,7 @@ export class PaymentService {
                 }, // base64-encoded image string
             } // base64-encoded image string
         } catch (err) {
-            throw new Error('Failed to generate QR code: ' + err.message);
+            throw new Error('Failed to generate QR code: ' + err);
         }
     }
 
