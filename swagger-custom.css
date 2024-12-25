@@ -1,0 +1,11 @@
+/* swagger-custom.css */
+body {
+    font-family: 'spirits-soft' !important;
+    font-size: 14px !important;
+
+}
+
+.swagger-ui .topbar {
+    font-family: 'spirits-soft' !important;
+    /* background-color: #333 !important; */
+}
