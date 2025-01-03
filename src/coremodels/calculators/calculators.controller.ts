@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CalculatorsService } from './calculators.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { LoanInputDTO } from './calculators.dto';
+import { HRACalculatorDTO, LoanInputDTO } from './calculators.dto';
 
 
 @Controller('api')
@@ -28,6 +28,21 @@ export class CalculatorsController {
   calculateLoan(@Body() loanInput: LoanInputDTO) {
     const { loanAmount, tenureInMonths, interestRate } = loanInput;
     return this.calculatorsService.calculateLoanDetails(loanAmount, tenureInMonths, interestRate);
+  }
+
+  @Post('hra-calculator')
+  @ApiOperation({
+    summary: 'HRA Calculator API',
+    description: 'This API calculates the House Rent Allowance (HRA) based on the employee\'s basic salary, rent paid, and location. \n\n It accepts the basic salary, rent paid, and location (metro/non-metro) as input and returns the calculated HRA based on these parameters.' +
+      '\n\n <b>Request Body </b>' +
+      '\n\n <li><b>basicSalary:</b> number (The employee\'s basic salary, e.g., 50000)</li>' +
+      '\n\n <li><b>rentPaid:</b> number (The amount of rent paid by the employee, e.g., 15000)</li>' +
+      '\n\n <li><b>isMetroCity:</b> boolean (The location where the employee resides, can be "metro" then true or "non-metro" then false)</li>' +
+      '\n\n <b><b>Response (HRA Details):</b></b>' +
+      '\n\n <li><b>hra:</b> number (The calculated House Rent Allowance, e.g., 15000)</li>',
+  })
+  async calculateHRA(@Body() request: HRACalculatorDTO) {
+    return this.calculatorsService.calculateHRA(request.basicSalary, request.actualRentPaid, request.isMetroCity);
   }
 
 }

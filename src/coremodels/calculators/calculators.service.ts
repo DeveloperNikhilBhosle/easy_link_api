@@ -51,4 +51,35 @@ export class CalculatorsService {
     }
 
     //#endregion
+
+
+    async calculateHRA(basicSalary: number, rentPaid: number, location: boolean) {
+        // Location-based multiplier for HRA calculation
+        let locationMultiplier = 0;
+
+        switch (location) {
+            case true:
+                locationMultiplier = 0.50; // 50% of the basic salary
+                break;
+            case false:
+                locationMultiplier = 0.40; // 40% of the basic salary
+                break;
+            default:
+                locationMultiplier = 0.30; // Default 30% if location is unknown
+        }
+
+        // HRA based on location and basic salary
+        const hraBasedOnSalary = basicSalary * locationMultiplier;
+
+        // The HRA that will be provided is the lesser of rent paid or the calculated HRA
+        var hra = Math.min(hraBasedOnSalary, rentPaid);
+
+        return {
+            statusCode: 200,
+            message: "SUCCESS",
+            data: {
+                deductionAllowed: hra
+            }
+        }
+    }
 }

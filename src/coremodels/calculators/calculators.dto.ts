@@ -11,3 +11,14 @@ export class LoanInputDTO {
     @ApiProperty()
     interestRate: number;
 }
+
+export class HRACalculatorDTO {
+    @ApiProperty()
+    basicSalary: number;
+
+    @ApiProperty()
+    actualRentPaid: number;
+
+    @ApiProperty()
+    isMetroCity: boolean;
+}
